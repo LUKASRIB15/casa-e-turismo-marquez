@@ -149,7 +149,6 @@ export function PropertyCard({
         property={property}
         open={editModalOpen}
         onOpenChange={setEditModalOpen}
-        onSave={() => {}}
       />
       <PropertyDeleteModal
         property={property}

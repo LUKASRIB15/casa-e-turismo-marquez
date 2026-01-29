@@ -225,7 +225,6 @@ export default function EditPropertiesAvailables() {
       <PropertyCreateModal
         open={createModalOpen}
         onOpenChange={setCreateModalOpen}
-        onSave={() => {}}
       />
     </main>
   );

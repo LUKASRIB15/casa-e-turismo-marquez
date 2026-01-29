@@ -2,7 +2,7 @@
 
 import React, { useTransition } from "react";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,9 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Plus, Trash2, X } from "lucide-react";
+import { Loader2, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
-import type { Property } from "@/app/(public)/imoveis/page";
 import z from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,7 +45,7 @@ const propertyEditModalValidationSchema = z.object({
   qtd_beds: z.number(),
   qtd_cars: z.number(),
   area_size: z.number(),
-  isFavorite: z.boolean().optional().default(false),
+  isFavorite: z.boolean(),
   category: z.enum(["Casa", "Apartamento", "Terreno", "Pousada"]),
 });
 
@@ -173,13 +172,14 @@ export function PropertyCreateModal({
 
       const result = await res.json();
       if (!result.ok) {
-        return toast.error("Não foi possível cadastrar seu imóvel", {
+        toast.error("Não foi possível cadastrar seu imóvel", {
           style: {
             background: "#DC2626", // red-600
             color: "#FFFFFF",
             border: "1px solid #B91C1C", // red-700
           },
         });
+        return;
       }
 
       const pathImages = await Promise.all(
@@ -217,13 +217,14 @@ export function PropertyCreateModal({
       const result2 = await res2.json();
 
       if (!result2.ok) {
-        return toast.error("Não foi possível cadastrar seu imóvel", {
+        toast.error("Não foi possível cadastrar seu imóvel", {
           style: {
             background: "#DC2626", // red-600
             color: "#FFFFFF",
             border: "1px solid #B91C1C", // red-700
           },
         });
+        return;
       }
 
       toast.success("imóvel cadastrado com sucesso", {
@@ -595,7 +596,7 @@ export function PropertyCreateModal({
             </Button>
             <Button
               onClick={handleSubmit(handleSave, handleError)}
-              className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+              className="bg-linear-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
             >
               {isLoading ? (
                 <Loader2 className="w-8 h-8 text-slate-50 animate-spin" />

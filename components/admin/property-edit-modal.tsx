@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Plus, Trash2, X } from "lucide-react";
+import { Loader2, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import type { Property } from "@/app/(public)/imoveis/page";
 import z from "zod";
@@ -46,7 +46,7 @@ const propertyEditModalValidationSchema = z.object({
   qtd_beds: z.number(),
   qtd_cars: z.number(),
   area_size: z.number(),
-  isFavorite: z.boolean().optional().default(false),
+  isFavorite: z.boolean(),
   category: z.enum(["Casa", "Apartamento", "Terreno", "Pousada"]),
 });
 
@@ -56,14 +56,12 @@ interface PropertyEditModalProps {
   property: Property | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSave: (property: Property) => void;
 }
 
 export function PropertyEditModal({
   property,
   open,
   onOpenChange,
-  onSave,
 }: PropertyEditModalProps) {
   const formatPrice = (value: string) => {
     const numbers = value.replace(/\D/g, "");
@@ -79,9 +77,6 @@ export function PropertyEditModal({
   };
 
   const [images, setImages] = useState<string[]>([]);
-  const [pathImagesOfProperty, setPathImagesOfProperty] = useState<string[]>(
-    [],
-  );
   const [isLoading, startLoading] = useTransition();
   const { handleSubmit, control } = useForm<PropertyEditModalData>({
     resolver: zodResolver(propertyEditModalValidationSchema),
@@ -119,7 +114,7 @@ export function PropertyEditModal({
         (image: string) =>
           `https://wcuzdbjbfqvtwxmxrmya.supabase.co/storage/v1/object/public/properties_images/${image}`,
       );
-
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setImages(imagesWithValidURL);
     }
   }, [property]);
@@ -264,13 +259,14 @@ export function PropertyEditModal({
 
       const result = await res2.json();
       if (!result.ok) {
-        return toast.error("Não foi possível editar seu imóvel", {
+        toast.error("Não foi possível editar seu imóvel", {
           style: {
             background: "#DC2626", // red-600
             color: "#FFFFFF",
             border: "1px solid #B91C1C", // red-700
           },
         });
+        return;
       }
 
       toast.success("imóvel editado com sucesso", {
@@ -642,7 +638,7 @@ export function PropertyEditModal({
             </Button>
             <Button
               onClick={handleSubmit(handleSave, handleError)}
-              className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+              className="bg-linear-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
             >
               {isLoading ? (
                 <Loader2 className="w-8 h-8 text-slate-50 animate-spin" />
