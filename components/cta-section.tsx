@@ -1,7 +1,16 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export function CtaSection() {
+type CtaSectionProps = {
+  editMode?: boolean;
+};
+
+export function CtaSection({ editMode = false }: CtaSectionProps) {
+  const router = useRouter();
+
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
       {/* Background gradient */}
@@ -57,6 +66,7 @@ export function CtaSection() {
           </Button>
 
           <Button
+            onClick={() => router.push(editMode ? "/edit/imoveis" : "/imoveis")}
             size="lg"
             variant="outline"
             className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-white font-semibold px-8 py-6 text-base hover:cursor-pointer"

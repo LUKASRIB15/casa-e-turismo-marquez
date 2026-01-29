@@ -1,12 +1,16 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function HomeFooter() {
   const regions = [
     "Canoa Quebrada",
     "Majorlândia",
     "Quixaba",
-    "Cumbe",
     "Lagoa do Mato",
+    "Redonda",
+    "Icapuí",
   ];
 
   return (
@@ -16,26 +20,25 @@ export function HomeFooter() {
           {/* Logo e Descrição */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="w-6 h-6 text-white"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
+              <div className="w-15 h-15 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center overflow-hidden">
+                <Image
+                  src={"/logo-marquez.jpeg"}
+                  width={150}
+                  height={150}
+                  quality={100}
+                  alt="Logo Marquez"
+                />
               </div>
               <span className="text-xl font-semibold">
                 Casa e Turismo Marquez
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Especialistas em imóveis na região de Aracati e praias
-              paradisíacas do Ceará.
+              <span>&#8226;</span> 12 anos de experiência em hospedagem <br />{" "}
+              <span>&#8226;</span> 9 anos como Superhost / Anfitrião Airbnb{" "}
+              <br />
+              <span>&#8226;</span> Mais de 220 avaliações no Airbnb Especialista
+              em administração de aluguel por temporada
             </p>
           </div>
 
@@ -44,20 +47,69 @@ export function HomeFooter() {
             <h3 className="text-lg font-semibold">Contato</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-gray-400">
-                <Phone className="w-4 h-4 text-orange-500" />
-                <span className="text-sm">(88) 99999-9999</span>
+                <IconBrandWhatsapp className="w-4 h-4 text-orange-500" />
+                <span className="text-sm">(88) 99351-9431</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-4 h-4 text-orange-500" />
-                <span className="text-sm">
-                  contato@casaturismomarquez.com.br
-                </span>
+                <span className="text-sm">casaseturismomarquez@gmail.com</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <MapPin className="w-4 h-4 text-orange-500" />
-                <span className="text-sm">Aracati - CE</span>
+                <div className="flex flex-col">
+                  <span className="text-sm">
+                    Rua Travessa Tabelião João Paulo, nº 25
+                  </span>
+                  <span className="text-sm">CEP: 62803-258</span>
+                </div>
               </li>
             </ul>
+            {/* Redes sociais */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Redes Sociais</h3>
+              <div className="flex items-center gap-4">
+                <Link
+                  href={
+                    "https://www.instagram.com/casaseturismomarquez?igsh=dDhwOWhzZDF3dGhs"
+                  }
+                  className="flex items-center gap-3 text-gray-400"
+                >
+                  <Image
+                    src={"/instagram-icon.png"}
+                    width={200}
+                    height={200}
+                    className="w-8 h-8"
+                    alt={"Ícone do Instagram"}
+                  />
+                </Link>
+                <Link
+                  href={
+                    "https://www.tiktok.com/@casaseturismomarquez?_r=1&_t=ZS-937e86XIYWC"
+                  }
+                  className="flex items-center gap-3 text-gray-400"
+                >
+                  <Image
+                    src={"/tiktok-icon.png"}
+                    width={200}
+                    height={200}
+                    className="w-8 h-8"
+                    alt={"Ícone do Tiktok"}
+                  />
+                </Link>
+                <Link
+                  href={"https://www.facebook.com/share/1AL3jTG6Be/"}
+                  className="flex items-center gap-3 text-gray-400"
+                >
+                  <Image
+                    src={"/facebook-icon.png"}
+                    width={200}
+                    height={200}
+                    className="w-8 h-8"
+                    alt={"Ícone do Facebook"}
+                  />
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Regiões Atendidas */}

@@ -34,10 +34,10 @@ export function HeroSection() {
 
         {/* Main Heading */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-2 ">
-          Seu Paraíso em
+          Você conhece,
         </h1>
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-orange-300/80 mb-6 ">
-          Canoa Quebrada
+          Você confia!
         </h2>
 
         {/* Subtitle */}
@@ -45,9 +45,9 @@ export function HeroSection() {
           Descubra casas e terrenos na região mais bela do Ceará
         </p>
 
-        <div className="bg-neutral-100 rounded-xl shadow-2xl p-6 max-w-2xl mx-auto">
+        {/* <div className="bg-neutral-100 rounded-xl shadow-2xl p-6 max-w-2xl mx-auto">
           <div className="flex flex-col md:flex-row gap-2 md:items-center">
-            {/* Tipo de negócio Select */}
+            
             <Select>
               <SelectTrigger className="flex-1 h-12 w-full border-neutral-200 bg-white">
                 <SelectValue placeholder="Tipo de negócio" />
@@ -59,7 +59,7 @@ export function HeroSection() {
               </SelectContent>
             </Select>
 
-            {/* Localização Select */}
+            
             <Select>
               <SelectTrigger className="flex-1 h-12 w-full border-neutral-200 bg-white">
                 <SelectValue placeholder="Localização" />
@@ -72,13 +72,13 @@ export function HeroSection() {
               </SelectContent>
             </Select>
 
-            {/* Search Button */}
+            
             <Button className="h-12 px-8 bg-sky-500 hover:bg-sky-600 text-white font-medium gap-2">
               <Search className="w-4 h-4" />
               Buscar
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">

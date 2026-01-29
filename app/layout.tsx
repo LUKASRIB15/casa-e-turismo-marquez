@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { Cabin } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { HomeFooter } from "@/components/home-footer";
+import { Toaster } from "sonner";
 
 const cabinSans = Cabin({
   variable: "--font-cabin-sans",
@@ -24,9 +23,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${cabinSans.className} antialiased`}>
-        <Header />
         {children}
-        <HomeFooter />
+        <Toaster />
       </body>
     </html>
   );

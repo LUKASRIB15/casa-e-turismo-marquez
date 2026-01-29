@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SlidersHorizontal } from "lucide-react";
+import { Loader2, PlusCircle, SearchX, SlidersHorizontal } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -11,87 +11,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PropertyCard } from "@/components/property-card";
+import { Button } from "@/components/ui/button";
+import { PropertyCreateModal } from "@/components/admin/property-create-modal";
 
-const allProperties = [
-  {
-    id: 1,
-    title: "Pousada Completa em Canoa Quebrada",
-    location: "Canoa Quebrada",
-    price: "R$ 1.850.000,00",
-    type: "Venda",
-    typeColor: "bg-green-500",
-    image: "/luxury-beach-pousada-with-pool-tropical.jpg",
-    beds: 12,
-    baths: 14,
-    cars: 10,
-    area: "1200m²",
-  },
-  {
-    id: 2,
-    title: "Casa de Praia em Canoa Quebrada com Vista para o Mar",
-    location: "Canoa Quebrada",
-    price: "R$ 850.000,00",
-    type: "Venda",
-    typeColor: "bg-green-500",
-    image: "/modern-beach-house-with-glass-windows-ocean-view.jpg",
-    beds: 4,
-    baths: 3,
-    cars: 2,
-    area: "400m²",
-  },
-  {
-    id: 3,
-    title: "Casa de Temporada em Canoa Quebrada",
-    location: "Canoa Quebrada",
-    price: "R$ 800,00",
-    type: "Temporada",
-    typeColor: "bg-orange-500",
-    image: "/luxury-vacation-house-with-pool-palm-trees.jpg",
-    beds: 3,
-    baths: 2,
-    cars: 1,
-    area: "200m²",
-  },
-  {
-    id: 4,
-    title: "Casa Moderna em Aracati Centro",
-    location: "Aracati",
-    price: "R$ 520.000,00",
-    type: "Venda",
-    typeColor: "bg-green-500",
-    image: "/modern-house-with-pool-sunset.jpg",
-    beds: 3,
-    baths: 4,
-    cars: 3,
-    area: "350m²",
-  },
-  {
-    id: 5,
-    title: "Terreno na Praia de Quixaba - Frente para o Mar",
-    location: "Quixaba",
-    price: "R$ 320.000,00",
-    type: "Venda",
-    typeColor: "bg-green-500",
-    image: "/beach-land-sunset-ocean-view.jpg",
-    beds: 0,
-    baths: 0,
-    cars: 0,
-    area: "600m²",
-  },
-  {
-    id: 6,
-    title: "Apartamento Mobiliado em Majorlândia",
-    location: "Majorlândia",
-    price: "R$ 2.500,00",
-    type: "Aluguel",
-    typeColor: "bg-blue-500",
-    image: "/furnished-apartment-living-room-modern.jpg",
-    beds: 2,
-    baths: 2,
-    cars: 1,
-    area: "80m²",
-  },
-];
+export type Property = {
+  id: string;
+  images: string;
+  status: "Venda" | "Temporada" | "Aluguel";
+  price: number;
+  title: string;
+  description: string;
+  locale: string;
+  qtd_bathroom: number;
+  qtd_beds: number;
+  qtd_cars: number;
+  area_size: number;
+  is_favorite: boolean;
+  category: string;
+  updated_at: Date | null;
+  created_at: Date;
+};
 
 const locations = [
   "Todas",
@@ -100,25 +39,45 @@ const locations = [
   "Quixaba",
   "Majorlândia",
 ];
+
 const businessTypes = ["Todos", "Venda", "Aluguel", "Temporada"];
 const categories = ["Todas", "Casa", "Apartamento", "Terreno", "Pousada"];
 
-export default function PropertiesAvailables() {
+export default function EditPropertiesAvailables() {
   const [businessType, setBusinessType] = useState("Todos");
   const [location, setLocation] = useState("Todas");
   const [category, setCategory] = useState("Todas");
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [isLoading, startLoading] = useTransition();
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
+  useEffect(() => {
+    async function fetchProperties() {
+      startLoading(async () => {
+        const res = await fetch("/api/properties", {
+          method: "GET",
+        });
+
+        const result = await res.json();
+        setProperties(result.properties);
+      });
+    }
+
+    fetchProperties();
+  }, []);
 
   const filteredProperties = useMemo(() => {
-    return allProperties.filter((property) => {
+    return properties.filter((property) => {
       const matchesBusinessType =
-        businessType === "Todos" || property.type === businessType;
+        businessType === "Todos" || property.status === businessType;
       const matchesLocation =
-        location === "Todas" || property.location === location;
+        location === "Todas" || property.locale === location;
       // Category filter (simplified for demo)
-      const matchesCategory = category === "Todas" || true;
+      const matchesCategory =
+        category === "Todas" || property.category === category;
       return matchesBusinessType && matchesLocation && matchesCategory;
     });
-  }, [businessType, location, category]);
+  }, [properties, businessType, location, category]);
 
   return (
     <main className="min-h-screen bg-[#fdf5f0]">
@@ -136,7 +95,7 @@ export default function PropertiesAvailables() {
         {/* Content Grid */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
-          <aside className="w-full lg:w-64 flex-shrink-0">
+          <aside className="w-full lg:w-64 flex-shrink-0 flex flex-col gap-5">
             <Card className="border-0 shadow-md">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center justify-between text-lg font-semibold text-slate-800">
@@ -203,33 +162,71 @@ export default function PropertiesAvailables() {
                 </div>
               </CardContent>
             </Card>
+            <Button
+              onClick={() => setCreateModalOpen(true)}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 text-md py-6 hover:cursor-pointer"
+            >
+              Adicionar novo imóvel
+              <PlusCircle className="w-4 h-4" />
+            </Button>
           </aside>
 
           {/* Properties Grid */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {filteredProperties.map((property, index) => (
-                <div
-                  key={property.id}
-                  className="opacity-0 animate-fade-up"
-                  style={{ animationDelay: `${index * 80}ms` }}
-                >
-                  <PropertyCard key={property.id} property={property} />
-                </div>
-              ))}
-            </div>
-
-            {/* Empty State */}
-            {filteredProperties.length === 0 && (
-              <div className="text-center py-16">
-                <p className="text-slate-500 text-lg">
-                  Nenhum imóvel encontrado com os filtros selecionados.
-                </p>
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center text-center py-24 px-4 w-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 mb-6">
+                <Loader2 className="w-8 h-8 text-slate-400 animate-spin mb-4" />
               </div>
-            )}
-          </div>
+
+              <p className="text-slate-500 text-sm">
+                Buscando imóveis disponíveis...
+              </p>
+            </div>
+          ) : (
+            <div className="flex-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredProperties.map((property, index) => (
+                  <div
+                    key={property.id}
+                    className="opacity-0 animate-fade-up"
+                    style={{ animationDelay: `${index * 80}ms` }}
+                  >
+                    <PropertyCard
+                      key={property.id}
+                      property={property}
+                      editMode
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Empty State */}
+              {filteredProperties.length === 0 && (
+                <div className="flex flex-col items-center justify-center text-center py-24 px-4">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 mb-6">
+                    <SearchX className="w-8 h-8 text-slate-400" />
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-slate-700 mb-2">
+                    Nenhum imóvel encontrado
+                  </h3>
+
+                  <p className="text-slate-500 max-w-md mb-6">
+                    Não encontramos imóveis que correspondam aos filtros
+                    selecionados. Tente ajustar os filtros ou remover algumas
+                    restrições para ver mais opções.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
+      <PropertyCreateModal
+        open={createModalOpen}
+        onOpenChange={setCreateModalOpen}
+        onSave={() => {}}
+      />
     </main>
   );
 }

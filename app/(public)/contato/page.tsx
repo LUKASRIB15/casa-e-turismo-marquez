@@ -38,9 +38,10 @@ export default function ContactPage() {
 
       {/* Content Section */}
       <section className="container mx-auto px-4 pb-20">
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto"> */}
+        <div className="flex flex-wrap justify-center gap-6">
           {/* Contact Form */}
-          <Card className="border border-gray-200 shadow-sm opacity-0 animate-fade-left">
+          {/* <Card className="border border-gray-200 shadow-sm opacity-0 animate-fade-left">
             <CardHeader>
               <CardTitle className="text-xl font-bold text-[#1e3a5f]">
                 Envie sua Mensagem
@@ -119,10 +120,10 @@ export default function ContactPage() {
                 </Button>
               </form>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Right Column */}
-          <div className="space-y-6 opacity-0 animate-fade-right">
+          <div className="space-y-6 opacity-0 animate-fade-right w-full max-w-150">
             {/* Contact Info Card */}
             <Card className="border-0 overflow-hidden p-0">
               <div
@@ -147,10 +148,7 @@ export default function ContactPage() {
                         Telefone
                       </p>
                       <p className="text-white/90 text-sm sm:text-base">
-                        (88) 99999-9999
-                      </p>
-                      <p className="text-white/90 text-sm sm:text-base">
-                        (88) 3421-0000
+                        (88) 99351-9431
                       </p>
                     </div>
                   </div>
@@ -165,7 +163,7 @@ export default function ContactPage() {
                         E-mail
                       </p>
                       <p className="text-white/90 text-sm sm:text-base">
-                        contato@casaturismomarquez.com.br
+                        casaseturismomarquez@gmail.com
                       </p>
                     </div>
                   </div>
@@ -183,7 +181,8 @@ export default function ContactPage() {
                         Aracati - CE
                       </p>
                       <p className="text-white/90 text-sm sm:text-base">
-                        Atendemos toda região
+                        Rua Travessa Tabelião João Paulo, nº 25 <br />
+                        CEP: 62803-258
                       </p>
                     </div>
                   </div>
@@ -200,12 +199,10 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Segunda a Sexta</span>
-                  <span className="font-medium text-gray-800">8h às 18h</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Sábado</span>
-                  <span className="font-medium text-gray-800">8h às 12h</span>
+                  <span className="text-gray-600">Segunda a Sábado</span>
+                  <span className="font-medium text-gray-800">
+                    9h às 12h - 14h às 21h
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-2">
                   <span className="text-gray-600">Domingo</span>

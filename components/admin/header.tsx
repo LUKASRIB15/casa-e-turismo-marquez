@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import LogoMarquez from "../assets/logo-marquez.jpeg";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,7 +34,7 @@ export function Header() {
                 Casa e Turismo Marquez
               </span>
               <span className="text-muted-foreground text-xs">
-                O símbolo de Canoa no seu imóvel
+                Versão para Administrador
               </span>
             </div>
           </Link>
@@ -43,47 +42,42 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2 ">
             <Button
-              variant={pathname === "/inicio" ? "default" : "ghost"}
+              variant={pathname === "/edit/inicio" ? "default" : "ghost"}
               className={clsx(
                 "text-foreground gap-2",
-                pathname === "/inicio" &&
+                pathname === "/edit/inicio" &&
                   "bg-primary text-primary-foreground hover:bg-primary/90",
               )}
-              onClick={() => route.push("/inicio")}
+              onClick={() => route.push("/edit/inicio")}
             >
               <Home className="w-4 h-4" />
               Início
             </Button>
             <Button
-              variant={pathname === "/imoveis" ? "default" : "ghost"}
+              variant={pathname === "/edit/imoveis" ? "default" : "ghost"}
               className={clsx(
                 "text-foreground gap-2",
-                pathname === "/imoveis" &&
+                pathname === "/edit/imoveis" &&
                   "bg-primary text-primary-foreground hover:bg-primary/90",
               )}
-              onClick={() => route.push("/imoveis")}
+              onClick={() => route.push("/edit/imoveis")}
             >
               <Building2 className="w-4 h-4" />
               Imóveis
             </Button>
             <Button
-              variant={pathname === "/contato" ? "default" : "ghost"}
-              className={clsx(
-                "text-foreground gap-2",
-                pathname === "/contato" &&
-                  "bg-primary text-primary-foreground hover:bg-primary/90",
-              )}
-              onClick={() => route.push("/contato")}
+              variant={pathname === "/edit/imoveis" ? "default" : "ghost"}
+              className={
+                "bg-gradient-to-r from-red-500 to-red-800 hover:from-red-600 hover:to-red-900 text-white"
+              }
+              onClick={async () => {
+                await fetch("/api/admin/logout", {
+                  method: "POST",
+                });
+                route.refresh();
+              }}
             >
-              <Mail className="w-4 h-4" />
-              Contato
-            </Button>
-            <Button
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground gap-2 ml-2 bg-transparent"
-            >
-              <Phone className="w-4 h-4" />
-              Ligar Agora
+              Sair do modo Admin
             </Button>
           </nav>
 
@@ -115,50 +109,29 @@ export function Header() {
           `}
         >
           <Button
-            variant={pathname === "/inicio" ? "default" : "ghost"}
+            variant={pathname === "/edit/inicio" ? "default" : "ghost"}
             className={clsx(
               "gap-2 justify-start",
-              pathname === "/inicio" &&
+              pathname === "/edit/inicio" &&
                 "bg-primary text-primary-foreground gap-2 justify-start",
             )}
-            onClick={() => route.push("/inicio")}
+            onClick={() => route.push("/edit/inicio")}
           >
             <Home className="w-4 h-4" />
             Início
           </Button>
 
           <Button
-            variant={pathname === "/imoveis" ? "default" : "ghost"}
+            variant={pathname === "/edit/imoveis" ? "default" : "ghost"}
             className={clsx(
               "gap-2 justify-start",
-              pathname === "/imoveis" &&
+              pathname === "/edit/imoveis" &&
                 "bg-primary text-primary-foreground gap-2 justify-start",
             )}
-            onClick={() => route.push("/imoveis")}
+            onClick={() => route.push("/edit/imoveis")}
           >
             <Building2 className="w-4 h-4" />
             Imóveis
-          </Button>
-
-          <Button
-            variant={pathname === "/contato" ? "default" : "ghost"}
-            className={clsx(
-              "gap-2 justify-start",
-              pathname === "/contato" &&
-                "bg-primary text-primary-foreground gap-2 justify-start",
-            )}
-            onClick={() => route.push("/contato")}
-          >
-            <Mail className="w-4 h-4" />
-            Contato
-          </Button>
-
-          <Button
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground gap-2 justify-start bg-transparent"
-          >
-            <Phone className="w-4 h-4" />
-            Ligar Agora
           </Button>
         </nav>
       </div>
