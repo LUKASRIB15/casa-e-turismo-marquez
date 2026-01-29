@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
   const { is_favorite } = await req.json();
