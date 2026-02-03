@@ -10,9 +10,9 @@ const cabinSans = Cabin({
 });
 
 export const metadata: Metadata = {
-  title: "Casa e Turismo Marquez - Imóveis em Canoa Quebrada",
+  title: "Casa e Turismo Marquez",
   description:
-    "Especialistas em imóveis de praia em Canoa Quebrada. Descubra casas e terrenos na região mais bela do Ceará.",
+    "Especialistas em imóveis de praia em Praias. Descubra casas e terrenos na região mais bela do Ceará.",
 };
 
 export default function RootLayout({

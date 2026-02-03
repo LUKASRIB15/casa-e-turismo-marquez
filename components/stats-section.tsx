@@ -4,26 +4,26 @@ import { Card, CardContent } from "@/components/ui/card";
 const stats = [
   {
     icon: FileText,
-    value: "200+",
-    label: "Imóveis Disponíveis",
+    value: "Ampla carteira de imóveis",
+    // label: "30+ Imóveis Disponíveis",
     gradient: "from-cyan-400 to-blue-500",
   },
   {
     icon: Users,
-    value: "500+",
-    label: "Clientes Satisfeitos",
+    value: "Alta taxa de satisfação",
+    // label: "Clientes Satisfeitos",
     gradient: "from-pink-500 to-purple-500",
   },
   {
     icon: Award,
-    value: "15+",
-    label: "Anos de Experiência",
+    value: "Experiência consolidada",
+    // label: "Anos de Experiência",
     gradient: "from-orange-500 to-red-500",
   },
   {
     icon: Heart,
-    value: "100%",
-    label: "Dedicação",
+    value: "100% Dedicação",
+    // label: "Dedicação",
     gradient: "from-green-400 to-emerald-500",
   },
 ];
@@ -37,7 +37,7 @@ export function StatsSection() {
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 ">
               {stats.map((stat, index) => (
                 <Card
-                  key={stat.label}
+                  key={stat.value}
                   className={`border-0 shadow bg-neutral-100 transition-shadow duration-300 hover:shadow-xl  ${
                     index < stats.length - 1
                       ? "md:border-r md:border-gray-200 rounded-lg"
@@ -53,12 +53,12 @@ export function StatsSection() {
                         strokeWidth={1.5}
                       />
                     </div>
-                    <span className="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+                    <span className="text-3xl md:text-2xl font-bold text-gray-800 mb-1">
                       {stat.value}
                     </span>
-                    <span className="text-gray-500 text-sm md:text-base">
+                    {/* <span className="text-gray-500 text-sm md:text-base">
                       {stat.label}
-                    </span>
+                    </span> */}
                   </CardContent>
                 </Card>
               ))}

@@ -35,6 +35,10 @@ export default function PropertyDetailPage() {
   const [property, setProperty] = useState<Property | null>(null);
   const [isLoading, startLoading] = useTransition();
 
+  const phone = "5588993519431";
+  const message =
+    "Olá! Tenho interesse em conversar sobre os imóveis disponíveis e entender melhor as opções que atendem ao meu perfil. Poderia me auxiliar?";
+
   useEffect(() => {
     async function getProperty(id: string) {
       startLoading(async () => {
@@ -276,16 +280,15 @@ export default function PropertyDetailPage() {
 
             {/* Contact Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="flex-1 bg-green-500 hover:bg-green-600 text-white h-12">
+              <Button
+                className="flex-1 bg-green-500 hover:bg-green-600 text-white h-12"
+                onClick={() => {
+                  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                  window.open(url, "_blank");
+                }}
+              >
                 <MessageCircle className="h-5 w-5 mr-2" />
                 Chamar no WhatsApp
-              </Button>
-              <Button
-                variant="outline"
-                className="flex-1 border-primary text-primary hover:bg-primary hover:text-white h-12 bg-transparent"
-              >
-                <Phone className="h-5 w-5 mr-2" />
-                Ligar Agora
               </Button>
             </div>
           </div>

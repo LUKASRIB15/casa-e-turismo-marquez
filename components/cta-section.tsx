@@ -11,6 +11,10 @@ type CtaSectionProps = {
 export function CtaSection({ editMode = false }: CtaSectionProps) {
   const router = useRouter();
 
+  const phone = "5588993519431";
+  const message =
+    "Olá! Tenho interesse em conversar sobre os imóveis disponíveis e entender melhor as opções que atendem ao meu perfil. Poderia me auxiliar?";
+
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
       {/* Background gradient */}
@@ -60,6 +64,10 @@ export function CtaSection({ editMode = false }: CtaSectionProps) {
           <Button
             size="lg"
             className="bg-white text-orange-500 hover:bg-white/90 font-semibold px-8 py-6 text-base hover:cursor-pointer"
+            onClick={() => {
+              const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+              window.open(url, "_blank");
+            }}
           >
             Falar com Corretor
             <ChevronRight className="ml-2 h-5 w-5" />

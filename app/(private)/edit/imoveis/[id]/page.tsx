@@ -275,7 +275,7 @@ export default function PropertyDetailPage() {
             </Card> */}
 
             {/* Contact Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* <div className="flex flex-col sm:flex-row gap-4">
               <Button className="flex-1 bg-green-500 hover:bg-green-600 text-white h-12">
                 <MessageCircle className="h-5 w-5 mr-2" />
                 Chamar no WhatsApp
@@ -287,7 +287,7 @@ export default function PropertyDetailPage() {
                 <Phone className="h-5 w-5 mr-2" />
                 Ligar Agora
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -2,18 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Home, Building2, Mail, Phone, Menu, X, Flame } from "lucide-react";
+import { Home, Building2, Mail, Menu, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import LogoMarquez from "../assets/logo-marquez.jpeg";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
   const route = useRouter();
+
+  const phone = "5588993519431";
+  const message =
+    "Olá! Tenho interesse em conversar sobre os imóveis disponíveis e entender melhor as opções que atendem ao meu perfil. Poderia me auxiliar?";
 
   return (
     <header className="top-0 left-0 right-0 z-50 bg-white fixed shadow">
@@ -79,11 +82,14 @@ export function Header() {
               Contato
             </Button>
             <Button
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground gap-2 ml-2 bg-transparent"
+              className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+              onClick={() => {
+                const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                window.open(url, "_blank");
+              }}
             >
-              <Phone className="w-4 h-4" />
-              Ligar Agora
+              <MessageCircle className="h-5 w-5 mr-2" />
+              Chamar no WhatsApp
             </Button>
           </nav>
 
@@ -152,13 +158,15 @@ export function Header() {
             <Mail className="w-4 h-4" />
             Contato
           </Button>
-
           <Button
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground gap-2 justify-start bg-transparent"
+            className="flex-1 bg-green-500 hover:bg-green-600 text-white h-12"
+            onClick={() => {
+              const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+              window.open(url, "_blank");
+            }}
           >
-            <Phone className="w-4 h-4" />
-            Ligar Agora
+            <MessageCircle className="h-5 w-5 mr-2" />
+            Chamar no WhatsApp
           </Button>
         </nav>
       </div>

@@ -7,17 +7,17 @@ const beaches = [
   {
     name: "Canoa Quebrada",
     description: "A mais famosa praia do Ceará",
-    image: "/canoa-quebrada-dramatic-wave.jpg",
+    image: "/canoa-quebrada-praia.jpg",
   },
   {
     name: "Majorlândia",
     description: "Tranquilidade e beleza natural",
-    image: "/majorlandia-sunset-beach.jpg",
+    image: "/majorlandia-praia.png",
   },
   {
     name: "Quixaba",
     description: "Paraíso escondido",
-    image: "/quixaba-sunglasses-sand.jpg",
+    image: "/quixaba-praia.jpg",
   },
 ];
 
