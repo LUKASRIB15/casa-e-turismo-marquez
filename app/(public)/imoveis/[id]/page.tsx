@@ -131,7 +131,7 @@ export default function PropertyDetailPage() {
             </div>
 
             {/* Thumbnail Gallery */}
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               {JSON.parse(property!.images).map(
                 (img: string, index: number) => (
                   <button

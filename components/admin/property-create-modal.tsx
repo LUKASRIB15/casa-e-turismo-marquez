@@ -166,7 +166,7 @@ export function PropertyCreateModal({
           qtd_cars,
           status,
           title,
-          images: null,
+          images: [],
         }),
       });
 

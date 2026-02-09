@@ -233,7 +233,7 @@ export function PropertyEditModal({
         throw new Error("Erro ao fazer deleção das imagens no storage");
       }
 
-      const imagesToDatabasebase = JSON.stringify([
+      const imagesToDatabase = JSON.stringify([
         ...pathImagesToKeeping,
         ...pathNewImages,
       ]);
@@ -253,7 +253,7 @@ export function PropertyEditModal({
           qtd_cars,
           status,
           title,
-          images: imagesToDatabasebase,
+          images: imagesToDatabase,
         }),
       });
 
