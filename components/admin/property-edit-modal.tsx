@@ -35,6 +35,7 @@ const propertyEditModalValidationSchema = z.object({
   title: z.string(),
   description: z.string(),
   locale: z.enum([
+    "Aracati",
     "Canoa Quebrada",
     "Majorlândia",
     "Quixaba",
@@ -494,6 +495,9 @@ export function PropertyEditModal({
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem key={"Aracati"} value={"Aracati"}>
+                      Aracati
+                    </SelectItem>
                     <SelectItem key={"Canoa Quebrada"} value={"Canoa Quebrada"}>
                       Canoa Quebrada
                     </SelectItem>
