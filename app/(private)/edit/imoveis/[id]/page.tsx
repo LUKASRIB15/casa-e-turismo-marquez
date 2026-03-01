@@ -20,6 +20,7 @@ import {
   Loader2,
 } from "lucide-react";
 import type { Property } from "../page";
+import remarkBreaks from "remark-breaks";
 
 const typeColors = {
   Venda: "bg-green-500 hover:bg-green-500",
@@ -80,6 +81,15 @@ export default function PropertyDetailPage() {
       </div>
     );
   }
+
+  const formattedDescription = property?.description
+    ?.replace(/ 🏖️/g, "\n🏖️")
+    ?.replace(/ ❄️/g, "\n❄️")
+    ?.replace(/ 🛏️/g, "\n🛏️")
+    ?.replace(/ 🏊/g, "\n🏊")
+    ?.replace(/ 🔥/g, "\n🔥")
+    ?.replace(/ 🍳/g, "\n🍳")
+    ?.replace(/ 🎱/g, "\n🎱");
 
   return (
     <main className="min-h-screen bg-[#fdf5f0] pt-14">
@@ -247,10 +257,10 @@ export default function PropertyDetailPage() {
               <CardContent className="p-6">
                 <h3 className="font-semibold text-slate-800 mb-3">Descrição</h3>
                 <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
+                  remarkPlugins={[remarkGfm, remarkBreaks]}
                   // className="prose prose-slate max-w-none"
                 >
-                  {property!.description}
+                  {formattedDescription}
                 </ReactMarkdown>
               </CardContent>
             </Card>

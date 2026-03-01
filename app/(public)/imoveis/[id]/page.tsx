@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import {
   ArrowLeft,
   MapPin,
@@ -84,6 +85,15 @@ export default function PropertyDetailPage() {
       </div>
     );
   }
+
+  const formattedDescription = property?.description
+    ?.replace(/ 🏖️/g, "\n🏖️")
+    ?.replace(/ ❄️/g, "\n❄️")
+    ?.replace(/ 🛏️/g, "\n🛏️")
+    ?.replace(/ 🏊/g, "\n🏊")
+    ?.replace(/ 🔥/g, "\n🔥")
+    ?.replace(/ 🍳/g, "\n🍳")
+    ?.replace(/ 🎱/g, "\n🎱");
 
   return (
     <main className="min-h-screen bg-[#fdf5f0] pt-14">
@@ -251,10 +261,10 @@ export default function PropertyDetailPage() {
               <CardContent className="p-6">
                 <h3 className="font-semibold text-slate-800 mb-3">Descrição</h3>
                 <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  // className="prose prose-slate max-w-none"
+                  remarkPlugins={[remarkGfm, remarkBreaks]}
+                  //className="prose max-w-none"
                 >
-                  {property!.description}
+                  {formattedDescription}
                 </ReactMarkdown>
               </CardContent>
             </Card>
