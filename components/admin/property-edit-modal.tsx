@@ -40,8 +40,11 @@ const propertyEditModalValidationSchema = z.object({
     "Majorlândia",
     "Quixaba",
     "Lagoa do Mato",
-    "Redonda",
     "Icapuí",
+    "Fortaleza",
+    "Beberibe",
+    "Cumbe",
+    "Redonda",
   ]),
   qtd_bathroom: z.number(),
   qtd_beds: z.number(),
@@ -101,8 +104,11 @@ export function PropertyEditModal({
         | "Majorlândia"
         | "Quixaba"
         | "Lagoa do Mato"
-        | "Redonda"
-        | "Icapuí",
+        | "Icapuí"
+        | "Fortaleza"
+        | "Beberibe"
+        | "Cumbe"
+        | "Redonda",
     },
   });
 
@@ -515,6 +521,15 @@ export function PropertyEditModal({
                     </SelectItem>
                     <SelectItem key={"Icapuí"} value={"Icapuí"}>
                       Icapuí
+                    </SelectItem>
+                    <SelectItem key={"Fortaleza"} value={"Fortaleza"}>
+                      Fortaleza
+                    </SelectItem>
+                    <SelectItem key={"Beberibe"} value={"Beberibe"}>
+                      Beberibe
+                    </SelectItem>
+                    <SelectItem key={"Cumbe"} value={"Cumbe"}>
+                      Cumbe
                     </SelectItem>
                   </SelectContent>
                 </Select>

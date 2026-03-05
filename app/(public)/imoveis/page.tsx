@@ -36,6 +36,11 @@ const locations = [
   "Aracati",
   "Quixaba",
   "Majorlândia",
+  "Icapuí",
+  "Fortaleza",
+  "Beberibe",
+  "Cumbe",
+  "Redonda",
 ];
 
 const businessTypes = ["Todos", "Venda", "Aluguel", "Temporada"];
